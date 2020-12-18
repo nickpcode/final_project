@@ -30,16 +30,17 @@ app.secret_key = os.getenv('SECRET')
 #     except models.DoesNotExist:
 #         return None
 
-CORS(shirt, origins='*', supports_credentials=True)
-CORS(jacket, origins='*', supports_credentials=True)
-CORS(pant, origins='*', supports_credentials=True)
-CORS(shoe, origins='*', supports_credentials=True)
+CORS(shirt, origins='*', 'https://fitfineapp.herokuapp.com' supports_credentials=True)
+CORS(jacket, origins='*', 'https://fitfineapp.herokuapp.com' supports_credentials=True)
+CORS(pant, origins='*', 'https://fitfineapp.herokuapp.com' supports_credentials=True)
+CORS(shoe, origins='*', 'https://fitfineapp.herokuapp.com',  supports_credentials=True)
 
 
 app.register_blueprint(shirt, url_prefix='/api/v1/shirts')
 app.register_blueprint(jacket, url_prefix='/api/v1/jackets')
 app.register_blueprint(pant, url_prefix='/api/vi/pants')
 app.register_blueprint(shoe, url_prefix='/api/vi/shoes')
+
 # app.register_blueprint(user, url_prefix='/user')
 
 #LLogic for our dtatbase connection
