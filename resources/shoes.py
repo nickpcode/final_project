@@ -8,44 +8,44 @@ from playhouse.shortcuts import model_to_dict
 # second argument is it's import_name
 # The third argument is the url_prefix so we don't have
 # to prefix all our apis with /api/v1
-shirt = Blueprint('shirts', 'shirt')
+shoe = Blueprint('shoes', 'shoe')
 
 # used from flask react hmwk
-@shirt.route('/', methods=["GET"])
-def show_all_shirts():
+@shoe.route('/', methods=["GET"])
+def show_all_shoes():
     try:
-        shirts = [model_to_dict(shirt) for shirt in models.Shirt.select()]
-        print(shirts)
-        return jsonify(data=shirts, status={"code": 200, "message": "Success"})
+        shoes = [model_to_dict(shoe) for shoe in models.Shoe.select()]
+        print(shoes)
+        return jsonify(data=shoes, status={"code": 200, "message": "Success"})
     except models.DoesNotExist:
         return jsonify(data={}, status={"code": 401, "message": "Error getting the resources"})
 
-@shirt.route('/', methods=["POST"])
-def create_shirts():
+@shoe.route('/', methods=["POST"])
+def create_shoes():
     payload = request.get_json()
     print(type(payload), 'payload')
-    new_shirt = models.Shirt.create(**payload)
-    shirt_dict = model_to_dict(new_shirt)
-    return jsonify(data=shirt_dict, status={"code": 201, "message": "Success"})
+    new_shoe = models.Shoe.create(**payload)
+    shoe_dict = model_to_dict(new_shoe)
+    return jsonify(data=shoe_dict, status={"code": 201, "message": "Success"})
 
 #individual show route
-@shirt.route('/<id>', methods=["GET"])
-def get_one_shirt(id):
-    shirt = models.Shirt.get_by_id(id)
-    print(shirt.__dict__)
-    return jsonify(data=model_to_dict(shirt), status={"code": 200, "message": "Success"})
+@shoe.route('/<id>', methods=["GET"])
+def get_one_shoe(id):
+    shoe = models.Shoe.get_by_id(id)
+    print(shoe.__dict__)
+    return jsonify(data=model_to_dict(shoe), status={"code": 200, "message": "Success"})
 
 #update route
-@shirt.route('/<id>', methods=["PUT"])
-def change_shirt(id):
+@shoe.route('/<id>', methods=["PUT"])
+def change_shoe(id):
     payload = request.get_json()
-    query = models.Shirt.update(**payload).where(models.Shirt.id == id)
+    query = models.Shoe.update(**payload).where(models.Shoe.id == id)
     query.execute()
-    return jsonify(data=model_to_dict(models.Shirt.get_by_id(id)), status={"code":200, "message": "Success"})
+    return jsonify(data=model_to_dict(models.Shoe.get_by_id(id)), status={"code":200, "message": "Success"})
 
 #delete route
-@shirt.route('/<id>', methods=["DELETE"])
-def donate_shirt(id):
-    query = models.Shirt.delete().where(models.Shirt.id==id)
+@shoe.route('/<id>', methods=["DELETE"])
+def donate_shoe(id):
+    query = models.Shoe.delete().where(models.Shoe.id==id)
     query.execute()
     return jsonify(data="resource successfully deleted", status={"code": 200, "message": "resource successfully deleted"})
