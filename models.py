@@ -15,6 +15,7 @@ class Shirt(Model):
     color = CharField()
     fabric = CharField()
     brand = CharField()
+    image = CharField
     created_at = DateTimeField(default=datetime.datetime.now)
 
     class Meta:
@@ -24,6 +25,7 @@ class Jacket(Model):
     color = CharField()
     fabric = CharField()
     brand = CharField()
+    image = CharField()
     created_at = DateTimeField(default=datetime.datetime.now)
 
     class Meta:
@@ -33,6 +35,7 @@ class Pant(Model):
     color = CharField()
     fabric = CharField()
     brand = CharField()
+    image = CharField()
     created_at = DateTimeField(default=datetime.datetime.now)
 
     class Meta:
@@ -42,6 +45,7 @@ class Shoe(Model):
     color = CharField()
     fabric = CharField()
     brand = CharField()
+    image = CharField()
     created_at = DateTimeField(default=datetime.datetime.now)
 
     class Meta:
