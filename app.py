@@ -1,8 +1,10 @@
 from flask import Flask,jsonify,g
 from flask_cors import CORS
+from dotenv import load_dotenv
+load_dotenv()
 # from flask_login import LoginManager
-from dotenv import *
 
+import os
 import models
 from resources.shirts import shirt
 from resources.jackets import jacket
@@ -11,13 +13,13 @@ from resources.shoes import shoe
 # from resources.users import user
 
 DEBUG = True
-PORT = process.env.port
+PORT = os.getenv('PORT')
 
 # Initialize an instance of the Flask class.
 # This starts the website!
 app = Flask(__name__)
 
-app.secret_key = process.env.secret
+app.secret_key = os.getenv('SECRET')
 # login_manager.init_app(app)
 
 # @login_manager.user_loader

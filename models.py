@@ -11,7 +11,7 @@ DATABASE = PostgresqlDatabase('clothes')
 #     class Meta:
 #         database = DATABASE
 
-class Shirts(Model):
+class Shirt(Model):
     color = CharField()
     fabric = CharField()
     brand = CharField()
@@ -20,7 +20,7 @@ class Shirts(Model):
     class Meta:
         database = DATABASE
 
-class Jackets(Model):
+class Jacket(Model):
     color = CharField()
     fabric = CharField()
     brand = CharField()
@@ -29,7 +29,7 @@ class Jackets(Model):
     class Meta:
         database = DATABASE
 
-class Pants(Model):
+class Pant(Model):
     color = CharField()
     fabric = CharField()
     brand = CharField()
@@ -38,7 +38,7 @@ class Pants(Model):
     class Meta:
         database = DATABASE
 
-class Shoes(Model):
+class Shoe(Model):
     color = CharField()
     fabric = CharField()
     brand = CharField()
@@ -50,6 +50,6 @@ class Shoes(Model):
 
 def initialize():
     DATABASE.connect()
-    DATABASE.create_tables([Users, Shirts, Jackets, Pants, Shoes], safe=True)
+    DATABASE.create_tables([Shirt, Jacket, Pant, Shoe], safe=True)
     print("TABLES Created")
     DATABASE.close()
