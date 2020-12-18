@@ -1,6 +1,6 @@
 from flask import Flask,jsonify,g
 from flask_cors import CORS
-from flask_login import LoginManager
+# from flask_login import LoginManager
 from dotenv import *
 
 import models
@@ -8,7 +8,7 @@ from resources.shirts import shirt
 from resources.jackets import jacket
 from resources.pants import pant
 from resources.shoes import shoe
-from resources.users import user
+# from resources.users import user
 
 DEBUG = True
 PORT = process.env.port
@@ -18,14 +18,14 @@ PORT = process.env.port
 app = Flask(__name__)
 
 app.secret_key = process.env.secret
-login_manager.init_app(app)
+# login_manager.init_app(app)
 
-@login_manager.user_loader
-def load_user(userid):
-    try:
-        return models.Users.get(models.Users.id == userid)
-    except models.DoesNotExist:
-        return None
+# @login_manager.user_loader
+# def load_user(userid):
+#     try:
+#         return models.Users.get(models.Users.id == userid)
+#     except models.DoesNotExist:
+#         return None
 
 #LLogic for our dtatbase connection
 @app.before_request
@@ -40,6 +40,19 @@ def after_request(response):
     g.db.close()
     return response
 
+CORS(shirt, origins='*', supports_credentials=True)
+CORS(jacket, origins='*', supports_credentials=True)
+CORS(pant, origins='*', supports_credentials=True)
+CORS(shoe, origins='*', supports_credentials=True)
+
+
+app.register_blueprint(shirt, url_prefix='/api/v1/shirts')
+app.register_blueprint(jacket, url_prefix='/api/v1/jackets')
+app.register_blueprint(pant, url_prefix='/api/vi/pants')
+app.register_blueprint(shoe, url_prefix='/api/vi/shoes')
+# app.register_blueprint(user, url_prefix='/user')
+
+
 # The default URL ends in / ("my-website.com/").
 @app.route('/')
 def index():
@@ -47,4 +60,5 @@ def index():
 
 # Run the app when the program starts!
 if __name__ == '__main__':
+    models.initialize()
     app.run(debug=DEBUG, port=PORT)

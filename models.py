@@ -1,15 +1,15 @@
 from peewee import *
 import datetime
-from flask_login import UserMixin
+# from flask_login import UserMixin
 
 DATABASE = PostgresqlDatabase('clothes')
 
-class Users(UserMixin, Model):
-    username = CharField(unique=True)
-    password = CharField()
+# class Users(UserMixin, Model):
+#     username = CharField(unique=True)
+#     password = CharField()
 
-    class Meta:
-        database = DATABASE
+#     class Meta:
+#         database = DATABASE
 
 class Shirts(Model):
     color = CharField()
